@@ -1,14 +1,15 @@
-// src/stores/auth.ts
+import { ref } from "vue";
 import { defineStore } from "pinia";
 
-export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    isAuthenticated: false as boolean,
-  }),
-  actions: {
-    setAuthenticated(v: boolean) {
-      this.isAuthenticated = v;
-      sessionStorage.setItem("isAuthenticated", String(v));
-    },
-  },
+export const useAuthStore = defineStore("auth", () => {
+  const isAuthenticated = ref(false);
+
+  const setAuthenticated = (v: boolean) => {
+      isAuthenticated.value = v;
+      // sessionStorage.setItem("isAuthenticated", String(v));
+    }
+
+  return { isAuthenticated, setAuthenticated };
 });
+
+

@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+} from "@/components/ui/menubar";
 import { useAuthStore } from "@/stores/auth";
 
 import { logout } from "@/api/auth";
@@ -21,27 +26,32 @@ const go = (path: string) => {
 
 <template>
   <header>
-    <Menubar class="border-b bg-gray-100 px-4 py-2 justify-between flex">
+    <Menubar class="border-b px-4 py-6 justify-between flex fixed w-screen">
       <!-- 왼쪽 영역 -->
       <div class="flex space-x-4">
         <MenubarMenu>
-          <MenubarTrigger @click="go('/')">메인페이지</MenubarTrigger>
-        </MenubarMenu>
-
-        <MenubarMenu>
-          <MenubarTrigger @click="go('/test')">검색하기</MenubarTrigger>
+          <MenubarTrigger class="text-2xl font-serif" @click="go('/')"
+            >BANGO</MenubarTrigger
+          >
         </MenubarMenu>
       </div>
 
       <!-- 오른쪽 영역 -->
       <div class="flex space-x-4">
-        <MenubarMenu v-if="!auth.isAuthenticated">
-          <MenubarTrigger @click="go('/login')">로그인</MenubarTrigger>
-          <MenubarTrigger @click="go('/login')">회원가입</MenubarTrigger>
-          <MenubarTrigger @click="go('/profile')">마이페이지</MenubarTrigger>
+        <MenubarMenu>
+          <MenubarTrigger @click="go('/map')">검색하기</MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger @click="go('/notice')">공고보기</MenubarTrigger>
         </MenubarMenu>
 
-        <MenubarMenu v-else>
+        <MenubarMenu v-if="!auth.isAuthenticated">
+          <MenubarTrigger @click="go('/login')">로그인</MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu v-if="!auth.isAuthenticated">
+          <MenubarTrigger @click="go('/profile')">마이페이지</MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu v-if="auth.isAuthenticated">
           <MenubarTrigger @click="go('/profile')">마이페이지</MenubarTrigger>
           <MenubarTrigger @click="handleLogout">로그아웃</MenubarTrigger>
         </MenubarMenu>

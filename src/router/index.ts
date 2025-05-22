@@ -17,7 +17,11 @@ const routes = [
     component: Login,
     // meta: { hideLayout: true }, // <- Menubar/Footer 숨기기 설정
   },
-  { path: "/test", component: HelloWorld, meta: { requiresAuth: false } },
+  {
+    path: "/map",
+    component: HelloWorld,
+    meta: { requiresAuth: false, hideLayout: true },
+  },
   { path: "/profile", component: MyPage, meta: { requiresAuth: false } },
   {
     path: "/auth/:socialPlatform/redirect",

@@ -51,13 +51,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-#app {
-  /* max-width: 1280px; */
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

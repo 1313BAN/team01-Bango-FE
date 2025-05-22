@@ -9,10 +9,10 @@ const route = useRoute();
 <template>
   <div class="flex flex-col min-h-screen">
     <!-- 상단 메뉴 -->
-    <HeaderMenu v-if="!route.meta.hideLayout" />
+    <HeaderMenu />
 
     <!-- 메인 컨텐츠 -->
-    <main class="flex-1">
+    <main class="flex-1 mt-[50px]">
       <router-view />
     </main>
 

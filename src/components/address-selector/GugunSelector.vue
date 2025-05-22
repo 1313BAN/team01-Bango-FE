@@ -12,7 +12,7 @@ import {
 
 // props
 defineProps<{
-  list: DongCode[];
+  list: string[];
   selected: string | null;
   disabled?: boolean;
 }>();
@@ -34,17 +34,17 @@ const onSelect = (value: string | undefined | null) => {
     :modelValue="selected ?? ''"
     @update:modelValue="onSelect"
   >
-  <SelectTrigger class="w-[150px]">
-    <SelectValue placeholder="구/군 선택" />
+    <SelectTrigger class="w-[150px]">
+      <SelectValue placeholder="구/군 선택" />
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
         <SelectItem
-          v-for="item in list"
-          :key="item.gugunName"
-          :value="item.gugunName"
+          v-for="gugunName in list"
+          :key="gugunName"
+          :value="gugunName"
         >
-          {{ item.gugunName }}
+          {{ gugunName }}
         </SelectItem>
       </SelectGroup>
     </SelectContent>

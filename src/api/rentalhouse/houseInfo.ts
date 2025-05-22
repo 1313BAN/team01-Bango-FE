@@ -1,4 +1,4 @@
-import apiClient from "@/api/apiClient";
+import apiClient from "@/api";
 
 export async function fetchHouseInfo(
   sggCd: string,

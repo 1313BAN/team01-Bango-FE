@@ -1,21 +1,16 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import {
-  Menubar,
-  MenubarMenu,
-  MenubarTrigger,
-  MenubarContent,
-} from "@/components/ui/menubar";
+import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useAuthStore } from "@/stores/auth";
 
-import { logout } from "@/api/auth";
+// import { logout } from "@/api/auth/auth";
 
 const router = useRouter();
 const auth = useAuthStore();
 
 async function handleLogout() {
-  await logout();
+  // await logout();
   auth.setAuthenticated(false);
   router.push("/");
 }

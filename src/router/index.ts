@@ -3,15 +3,12 @@ import { useAuthStore } from "@/stores/auth";
 
 import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
-import Signup from "@/pages/Signup.vue";
-import Profile from "@/pages/Profile.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import LoginRedirect from "@/pages/LoginRedirect.vue";
 import MyPage from "@/pages/MyPage.vue";
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/signup", component: Signup },
   {
     path: "/login",
     component: Login,

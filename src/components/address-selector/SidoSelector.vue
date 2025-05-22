@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { DongCode } from "@/types/DongCode";
 import {
   Select,
   SelectContent,
@@ -12,7 +11,7 @@ import {
 
 // props
 defineProps<{
-  list: DongCode[];
+  list: string[];
   selected: string | null;
   disabled?: boolean;
 }>();
@@ -39,12 +38,8 @@ const onSelect = (value: string) => {
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
-        <SelectItem
-          v-for="item in list"
-          :key="item.sidoName"
-          :value="item.sidoName"
-        >
-          {{ item.sidoName }}
+        <SelectItem v-for="sidoName in list" :key="sidoName" :value="sidoName">
+          {{ sidoName }}
         </SelectItem>
       </SelectGroup>
     </SelectContent>

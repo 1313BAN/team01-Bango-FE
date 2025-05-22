@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import type { DongCode } from "@/types/DongCode";
-import { fetchSidoList, fetchGugunList, fetchDongList } from "@/api/dongcode";
-import { fetchHouseInfo } from "@/api/houseInfo";
+import { getSidoList, getGugunList, getDongList } from "@/api/dongcode";
+import { fetchHouseInfo } from "@/api/rentalhouse/houseInfo";
 
-import AddressSelector from "./AddressSelector.vue";
+import SidoSelector from "@/components/address-selector/SidoSelector.vue";
+import GugunSelector from "./GugunSelector.vue";
+import DongSelector from "./DongSelector.vue";
+
+// import AddressSelector from "./AddressSelector.vue";
 import { Button } from "../ui/button";
 
 // 선택된 값
@@ -13,8 +17,8 @@ const selectedGugun = ref<string | null>(null);
 const selectedDong = ref<string | null>(null);
 
 // 리스트
-const sidoList = ref<DongCode[]>([]);
-const gugunList = ref<DongCode[]>([]);
+const sidoList = ref<string[]>([]);
+const gugunList = ref<string[]>([]);
 const dongList = ref<DongCode[]>([]);
 
 // 시/도 선택시
@@ -25,11 +29,10 @@ const handleSidoChange = async (sido: string) => {
   gugunList.value = [];
   dongList.value = [];
 
-  const sidoName =
-    sidoList.value.find((item) => item.sidoName === sido)?.sidoName || "";
+  const sidoName = sidoList.value.find((item) => item === sido) || "";
 
   if (sidoName) {
-    gugunList.value = await fetchGugunList(sidoName);
+    gugunList.value = await getGugunList(sidoName);
   }
 };
 
@@ -40,12 +43,13 @@ const handleGugunChange = async (gugun: string) => {
   dongList.value = [];
 
   const sidoName =
-    sidoList.value.find((item) => item.sidoName === selectedSido.value)
-      ?.sidoName || "";
+    sidoList.value.find((item) => item === selectedSido.value) || "";
   const gugunName =
-    gugunList.value.find((item) => item.gugunName === gugun)?.gugunName || "";
+    gugunList.value.find((item) => item === selectedGugun.value) || "";
+
+  console.log(sidoName, gugunName);
   if (selectedSido.value && gugunName) {
-    dongList.value = await fetchDongList(sidoName, gugunName);
+    dongList.value = await getDongList(sidoName, gugunName);
   }
 };
 
@@ -74,13 +78,13 @@ const searchHandler = async () => {
 
 // mount 시 최초 시도 리스트 가져오기
 onMounted(async () => {
-  sidoList.value = await fetchSidoList();
+  sidoList.value = await getSidoList();
 });
 </script>
 
 <template>
   <div class="flex gap-4">
-    <!-- <SidoSelector
+    <SidoSelector
       :list="sidoList"
       :selected="selectedSido"
       @select="handleSidoChange"
@@ -96,8 +100,8 @@ onMounted(async () => {
       :selected="selectedDong"
       @select="handleDongChange"
       :disabled="!selectedGugun"
-    /> -->
-    <AddressSelector
+    />
+    <!-- <AddressSelector
       :list="sidoList"
       :selected="selectedSido"
       labelKey="sidoName"
@@ -117,7 +121,7 @@ onMounted(async () => {
       labelKey="dongName"
       placeholder="동 선택"
       @select="handleDongChange"
-    />
+    /> -->
     <Button @click="searchHandler">검색하기</Button>
   </div>
 </template>

@@ -1,8 +1,3 @@
-<!-- <template>
-  <footer class="bg-gray-100 text-center text-sm p-4 border-t">
-    ⓒ 2025 SSAFYHOME LYR JJY. All rights reserved.
-  </footer>
-</template> -->
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import {
@@ -16,18 +11,21 @@ import {
 <template>
   <footer class="bg-[#2d2d2d] text-gray-300 border-t border-gray-700 py-8 px-4">
     <div
-      class="max-w-6xl mx-auto flex flex-col md:flex-row md:justify-between gap-8"
+      class="max-w-6xl mx-auto flex flex-col md:flex-row md:justify-between gap-4"
     >
       <!-- 회사 정보 -->
       <div class="flex-1 space-y-1 text-left">
-        <div class="font-semibold text-lg text-white">(주)Bango (SSAFY)</div>
-        <div>대표 : lyr</div>
-        <div>주소 : 서울 강남구 테헤란로 212 멀티캠퍼스 601 (주)Bango</div>
-        <div>
-          고객센터 : <span class="font-medium text-white">02-1111-2222</span>
+        <div class="font-semibold text-base">(주)Bango (SSAFY)</div>
+        <div class="text-xs">대표 : lyr</div>
+        <div class="text-xs">
+          주소 : 서울 강남구 테헤란로 212 멀티캠퍼스 601 (주)Bango
+        </div>
+        <div class="text-xs">
+          고객센터 :
+          <span class="font-medium text-xs">02-1111-2222</span>
           | 평일 10:00 ~ 18:30, 점심 12:30 ~ 13:30 (토/일, 공휴일 휴무)
         </div>
-        <div>
+        <div class="text-xs">
           프로모션/사업 제휴 문의 :
           <a
             href="mailto:biz@station3.co.kr"
@@ -42,13 +40,13 @@ import {
           <Button
             variant="outline"
             size="sm"
-            class="border-gray-500 text-gray-500 px-4"
+            class="border-gray-500 text-gray-500 px-4 text-xs"
             >자주묻는질문</Button
           >
           <Button
             variant="default"
             size="sm"
-            class="px-4 bg-blue-600 text-white hover:bg-blue-500"
+            class="px-4 bg-blue-600 text-white hover:bg-blue-500 text-xs"
             >1:1문의</Button
           >
         </div>
@@ -69,7 +67,7 @@ import {
         </div>
       </div>
     </div>
-    <div class="text-center text-gray-500 text-xs mt-8">
+    <div class="text-center text-gray-500 text-[11px] mt-8">
       ⓒ 2025 BANGO LYR JJY. All rights reserved.
     </div>
   </footer>

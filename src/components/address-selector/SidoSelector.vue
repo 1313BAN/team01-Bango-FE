@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { DongCode } from "@/types/DongCode";
 import {
   Select,
   SelectContent,
@@ -12,18 +11,18 @@ import {
 
 // props
 defineProps<{
-  list: DongCode[];
+  list: string[];
   selected: string | null;
   disabled?: boolean;
 }>();
 
 // emit
 const emit = defineEmits<{
-  (e: "select", value: string): void;
+  (e: "select", value: any): void;
 }>();
 
 // 내부 선택 핸들러
-const onSelect = (value: string) => {
+const onSelect = (value: any) => {
   if (value != null) emit("select", value);
 };
 </script>
@@ -39,12 +38,8 @@ const onSelect = (value: string) => {
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
-        <SelectItem
-          v-for="item in list"
-          :key="item.sidoName"
-          :value="item.sidoName"
-        >
-          {{ item.sidoName }}
+        <SelectItem v-for="sidoName in list" :key="sidoName" :value="sidoName">
+          {{ sidoName }}
         </SelectItem>
       </SelectGroup>
     </SelectContent>

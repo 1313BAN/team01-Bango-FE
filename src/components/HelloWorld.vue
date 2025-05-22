@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from "vue";
 import { Button } from "@/components/ui/button";
-import { initializeMap, testMap } from "@/api/naverMaps";
+import { initializeMap, testMap } from "@/api/map/naverMaps";
 // import SidoSelector from "./address-selector/SidoSelector.vue";
 import AddressSelectorWrapper from "./address-selector/AddressSelectorWrapper.vue";
 

@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
-import { getSoicalAccessToken } from "@/api/member";
+import { getSocialAccessToken } from "@/api/member";
 
 onMounted(async () => {
   const route = useRoute();
@@ -12,11 +12,16 @@ onMounted(async () => {
   const AUTHORIZATION_CODE = new URL(window.location.href).searchParams.get(
     "code"
   );
+
+  if (!AUTHORIZATION_CODE) {
+    console.error("Authorization code is missing");
+    return;
+  }
   // console.log("Authorization code:", AUTHORIZATION_CODE);
 
-  const socialAccessToken = await getSoicalAccessToken({
+  const socialAccessToken = await getSocialAccessToken({
     socialPlatform: socialPlatform,
-    code: AUTHORIZATION_CODE!,
+    code: AUTHORIZATION_CODE,
   });
   console.log(socialAccessToken);
 

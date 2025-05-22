@@ -19,11 +19,11 @@ defineProps<{
 
 // emit
 const emit = defineEmits<{
-  (e: "select", value: string | undefined | null): void;
+  (e: "select", value: any): void;
 }>();
 
 // 내부 선택 핸들러
-const onSelect = (value: string | undefined | null) => {
+const onSelect = (value: any) => {
   if (value != null) emit("select", value);
 };
 </script>

@@ -18,11 +18,11 @@ defineProps<{
 
 // emit
 const emit = defineEmits<{
-  (e: "select", value: string): void;
+  (e: "select", value: any): void;
 }>();
 
 // 내부 선택 핸들러
-const onSelect = (value: string) => {
+const onSelect = (value: any) => {
   if (value != null) emit("select", value);
 };
 </script>

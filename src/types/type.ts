@@ -10,3 +10,9 @@ export type AuthToken = {
   accessToken: string;
   refreshToken: string;
 };
+
+export type Member = {
+  name: string;
+  email: string;
+  socialPlatform: string;
+};

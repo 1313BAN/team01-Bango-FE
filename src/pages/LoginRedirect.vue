@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import Cookies from "js-cookie";
 
-import { getSocialAccessToken } from "@/api/member";
+import { getSocialAccessToken, login } from "@/api/member";
+import type { LoginResponse } from "@/api/member/types";
+
+import { Card, CardContent } from "@/components/ui/card";
+import { LoaderCircleIcon } from "lucide-vue-next";
 
 onMounted(async () => {
   const route = useRoute();
+  const router = useRouter();
   const socialPlatform = route.params.socialPlatform.toString().toUpperCase();
-  // console.log("[소셜 로그인]" + socialPlatform);
 
   const AUTHORIZATION_CODE = new URL(window.location.href).searchParams.get(
     "code"
@@ -25,16 +30,36 @@ onMounted(async () => {
   });
   console.log(socialAccessToken);
 
-  // const socialToken = await getLoginToken(socialPlatform);
-  // console.log(socialToken);
+  const { token }: LoginResponse = await login({
+    socialPlatform: socialPlatform,
+    socialAccessToken: socialAccessToken,
+  });
 
-  // console.log(socialPlatform.toUpperCase());
+  console.log(token);
 
-  // const tokenDto = await postLogin(socialPlatform.toUpperCase(), socialToken);
-  // console.log(tokenDto);
+  Cookies.set("accessToken", token.accessToken, {
+    expires: new Date(Date.now() + 15 * 60 * 1000),
+    path: "/",
+  });
+
+  Cookies.set("refreshToken", token.accessToken, {
+    expires: 7,
+    path: "/",
+  });
+
+  router.push("/map");
 });
 </script>
 
 <template lang="">
-  <div></div>
+  <div class="mt-28 flex items-center justify-center">
+    <Card
+      class="w-full max-w-md shadow-xl p-6 flex items-center justify-center space-x-4 gap-6"
+    >
+      <LoaderCircleIcon class="animate-spin w-8 h-8 text-gray-600" />
+      <span class="text-xl font-semibold text-gray-800"
+        >로그인 중입니다...</span
+      >
+    </Card>
+  </div>
 </template>

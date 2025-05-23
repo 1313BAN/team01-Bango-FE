@@ -12,7 +12,7 @@ const route = useRoute();
     <HeaderMenu />
 
     <!-- 메인 컨텐츠 -->
-    <main class="flex-1 mt-[50px]">
+    <main class="flex-1 mt-16">
       <router-view />
     </main>
 

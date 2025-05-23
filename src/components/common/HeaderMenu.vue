@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { ref } from "vue";
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import BangoLogo from "@/assets/bango-logo.png";
+
 import { useAuthStore } from "@/stores/auth";
 
 // import { logout } from "@/api/auth/auth";
@@ -21,13 +22,13 @@ const go = (path: string) => {
 
 <template>
   <header>
-    <Menubar class="border-b px-4 py-6 justify-between flex fixed w-screen">
+    <Menubar class="border-b px-4 py-8 justify-between flex fixed w-screen">
       <!-- 왼쪽 영역 -->
       <div class="flex space-x-4">
         <MenubarMenu>
-          <MenubarTrigger class="text-2xl font-serif" @click="go('/')"
-            >BANGO</MenubarTrigger
-          >
+          <MenubarTrigger @click="go('/')">
+            <img :src="BangoLogo" class="h-14"
+          /></MenubarTrigger>
         </MenubarMenu>
       </div>
 

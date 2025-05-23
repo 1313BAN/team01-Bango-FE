@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
 
+// import { ref }
 import { useRouter } from "vue-router";
 import { Star, Home, ArrowLeft } from "lucide-vue-next";
 // import { HeroBackground } from '@/components/background';
 
+const NOT_FOUND_URL = import.meta.env.VITE_NOT_FOUND;
 const router = useRouter();
 
 function goHome(): void {
@@ -37,7 +39,7 @@ function goBack(): void {
             style="height: 500px; width: 500px"
             autoplay
             loop
-            src="https://lottie.host/4c58ca19-6e7a-4adb-9711-5d54a4021b6e/S0AqqzAC3v.lottie"
+            :src="NOT_FOUND_URL"
           />
         </div>
 

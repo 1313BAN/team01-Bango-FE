@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "vue-router";
 
@@ -44,6 +45,20 @@ const router = useRouter();
 const goLoginPage = () => {
   router.push("/login");
 };
+
+onMounted(() => {
+  console.log(`
+ _______  _______  __    _  _______  _______  __   __  
+|  _    ||   _   ||  |  | ||       ||       ||  | |  | 
+| |_|   ||  |_|  ||   |_| ||    ___||   _   ||  | |  | 
+|       ||       ||       ||   | __ |  | |  ||  | |  | 
+|  _   | |       ||  _    ||   ||  ||  |_|  ||__| |__| 
+| |_|   ||   _   || | |   ||   |_| ||       | __   __  
+|_______||__| |__||_|  |__||_______||_______||__| |__| 
+
+방고를 방문하신걸 환영합니다!!
+`);
+});
 </script>
 
 <!-- <template>

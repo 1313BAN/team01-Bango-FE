@@ -28,3 +28,7 @@ export const logout = async () => {
   const response = await api.post<ApiResponse<null>>(MEMBER.LOGOUT);
   // console.log(response);
 };
+
+export const withdraw = async () => {
+  const response = await api.delete(MEMBER.ME);
+};

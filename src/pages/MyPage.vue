@@ -1,11 +1,26 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+
 import { Button } from "@/components/ui/button";
+
 import { useAuthStore } from "@/stores/auth";
 import type { Member } from "@/types/type";
 
+import { withdraw } from "@/api/member";
+
 const auth = useAuthStore();
+const router = useRouter();
 
 const memberInfo: Member | null = auth.getUser;
+
+const withdrawHandler = async () => {
+  try {
+    await withdraw();
+  } finally {
+    auth.clearAuth();
+    router.push("/");
+  }
+};
 </script>
 
 <template>
@@ -27,7 +42,7 @@ const memberInfo: Member | null = auth.getUser;
 
     <div class="flex justify-between pt-4">
       <Button variant="outline">수정</Button>
-      <Button variant="destructive">탈퇴</Button>
+      <Button variant="destructive" @click="withdrawHandler">탈퇴</Button>
     </div>
   </div>
 </template>

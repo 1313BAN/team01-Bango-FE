@@ -47,6 +47,7 @@ import {
             variant="default"
             size="sm"
             class="px-4 bg-blue-600 text-white hover:bg-blue-500 text-xs"
+            @click="throw Error();"
             >1:1문의</Button
           >
         </div>

@@ -19,10 +19,15 @@ const routes = [
     component: HelloWorld,
     meta: { requiresAuth: true, hideLayout: true },
   },
-  { path: "/profile", component: MyPage, meta: { requiresAuth: false } },
+  { path: "/profile", component: MyPage, meta: { requiresAuth: true } },
   {
     path: "/auth/:socialPlatform/redirect",
     component: LoginRedirect,
+  },
+
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/pages/NotFound.vue"),
   },
 ];
 

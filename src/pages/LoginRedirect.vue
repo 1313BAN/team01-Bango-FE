@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import Cookies from "js-cookie";
+import { useAuthStore } from "@/stores/auth";
 
 import { getSocialAccessToken, login } from "@/api/member";
 import type { LoginResponse } from "@/api/member/types";
@@ -12,6 +12,7 @@ import { LoaderCircleIcon } from "lucide-vue-next";
 onMounted(async () => {
   const route = useRoute();
   const router = useRouter();
+  const auth = useAuthStore();
   const socialPlatform = route.params.socialPlatform.toString().toUpperCase();
 
   const AUTHORIZATION_CODE = new URL(window.location.href).searchParams.get(
@@ -28,24 +29,14 @@ onMounted(async () => {
     socialPlatform: socialPlatform,
     code: AUTHORIZATION_CODE,
   });
-  console.log(socialAccessToken);
+  // console.log(socialAccessToken);
 
-  const { token }: LoginResponse = await login({
+  const { member, token }: LoginResponse = await login({
     socialPlatform: socialPlatform,
     socialAccessToken: socialAccessToken,
   });
 
-  console.log(token);
-
-  Cookies.set("accessToken", token.accessToken, {
-    expires: new Date(Date.now() + 15 * 60 * 1000),
-    path: "/",
-  });
-
-  Cookies.set("refreshToken", token.accessToken, {
-    expires: 7,
-    path: "/",
-  });
+  auth.setAuth(member, token);
 
   router.push("/map");
 });

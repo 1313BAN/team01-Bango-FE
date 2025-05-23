@@ -1,4 +1,4 @@
-import type { AuthToken } from "@/types/type";
+import type { AuthToken, Member } from "@/types/type";
 
 export type SocialTokenRequest = {
   socialPlatform: string;
@@ -11,5 +11,6 @@ export type LoginRequest = {
 };
 
 export type LoginResponse = {
+  member: Member;
   token: AuthToken;
 };

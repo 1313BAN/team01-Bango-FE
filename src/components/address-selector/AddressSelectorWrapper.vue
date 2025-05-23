@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { DongCode } from "@/types/DongCode";
+import type { DongCode } from "@/types/type";
 import { getSidoList, getGugunList, getDongList } from "@/api/dongcode";
 import { fetchHouseInfo } from "@/api/rentalhouse/houseInfo";
 

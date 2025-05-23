@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import type { DongCode } from "@/types/DongCode";
 import {
   Select,
   SelectContent,

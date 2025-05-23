@@ -23,3 +23,8 @@ export const login = async (req: LoginRequest): Promise<LoginResponse> => {
 
   return response.data.data;
 };
+
+export const logout = async () => {
+  const response = await api.post<ApiResponse<null>>(MEMBER.LOGOUT);
+  // console.log(response);
+};

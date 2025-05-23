@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import { Button } from "@/components/ui/button";
 import BangoLogo from "@/assets/bango-logo.png";
 
 import { useAuthStore } from "@/stores/auth";
 
-// import { logout } from "@/api/auth/auth";
+import { logout } from "@/api/member";
 
 const router = useRouter();
 const auth = useAuthStore();
 
 async function handleLogout() {
-  // await logout();
-  auth.setAuthenticated(false);
+  try {
+    await logout();
+  } finally {
+    auth.clearAuth();
+  }
   router.push("/");
 }
 const go = (path: string) => {
@@ -33,23 +37,22 @@ const go = (path: string) => {
       </div>
 
       <!-- 오른쪽 영역 -->
-      <div class="flex space-x-4">
+      <div class="flex">
         <MenubarMenu>
-          <MenubarTrigger @click="go('/map')">검색하기</MenubarTrigger>
+          <Button variant="ghost" @click="go('/map')">검색하기</Button>
         </MenubarMenu>
         <MenubarMenu>
-          <MenubarTrigger @click="go('/notice')">공고보기</MenubarTrigger>
+          <Button variant="ghost" @click="go('/notice')">공고보기</Button>
         </MenubarMenu>
 
         <MenubarMenu v-if="!auth.isAuthenticated">
-          <MenubarTrigger @click="go('/login')">로그인</MenubarTrigger>
-        </MenubarMenu>
-        <MenubarMenu v-if="!auth.isAuthenticated">
-          <MenubarTrigger @click="go('/profile')">마이페이지</MenubarTrigger>
+          <Button variant="ghost" @click="go('/login')">로그인</Button>
         </MenubarMenu>
         <MenubarMenu v-if="auth.isAuthenticated">
-          <MenubarTrigger @click="go('/profile')">마이페이지</MenubarTrigger>
-          <MenubarTrigger @click="handleLogout">로그아웃</MenubarTrigger>
+          <Button variant="ghost" @click="go('/profile')">마이페이지</Button>
+        </MenubarMenu>
+        <MenubarMenu v-if="auth.isAuthenticated">
+          <Button variant="ghost" @click="handleLogout">로그아웃</Button>
         </MenubarMenu>
       </div>
     </Menubar>

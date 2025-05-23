@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { Button } from "@/components/ui/button";
+import { useAuthStore } from "@/stores/auth";
+import type { Member } from "@/types/type";
 
-const userInfo = ref({
-  code: 200,
-  message: "회원 조회에 성공했습니다.",
-  data: {
-    name: "Google_User_3e101c",
-    email: "alex68566856@gmail.com",
-    socialPlatform: "GOOGLE",
-  },
-});
+const auth = useAuthStore();
+
+const memberInfo: Member | null = auth.getUser;
 </script>
 
 <template>
@@ -20,15 +15,13 @@ const userInfo = ref({
     <h2 class="text-2xl font-bold text-center">내 정보</h2>
 
     <div class="space-y-4 text-gray-700">
+      <div><span class="font-semibold">이름:</span> {{ memberInfo?.name }}</div>
       <div>
-        <span class="font-semibold">이름:</span> {{ userInfo.data.name }}
-      </div>
-      <div>
-        <span class="font-semibold">이메일:</span> {{ userInfo.data.email }}
+        <span class="font-semibold">이메일:</span> {{ memberInfo?.email }}
       </div>
       <div>
         <span class="font-semibold">소셜 플랫폼:</span>
-        {{ userInfo.data.socialPlatform }}
+        {{ memberInfo?.socialPlatform }}
       </div>
     </div>
 

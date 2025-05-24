@@ -17,12 +17,17 @@ const routes = [
   {
     path: "/map",
     component: HelloWorld,
-    meta: { requiresAuth: false, hideLayout: true },
+    meta: { requiresAuth: true, hideLayout: true },
   },
-  { path: "/profile", component: MyPage, meta: { requiresAuth: false } },
+  { path: "/profile", component: MyPage, meta: { requiresAuth: true } },
   {
     path: "/auth/:socialPlatform/redirect",
     component: LoginRedirect,
+  },
+
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/pages/NotFound.vue"),
   },
 ];
 
@@ -34,9 +39,10 @@ const router = createRouter({
 // 인증 여부 확인
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore();
-  // console.log(auth.isAuthenticated);
+  const isAuthenticated = auth.getIsAuthenticated;
+  // console.log(isAuthenticated);
   // accessToken으로 api 호출해서 확인
-  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+  if (to.meta.requiresAuth && !isAuthenticated) {
     return next("/login");
   }
   next();

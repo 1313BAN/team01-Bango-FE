@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setupInterceptors } from "@/api/interceptors";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASEURL, // 공통 베이스 URL
@@ -7,5 +8,7 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+setupInterceptors(api);
 
 export default api;

@@ -1,8 +1,7 @@
 import { DONGCODE } from "../endpoint";
 import api from "@/api";
-import type { ApiResponse } from "@/api/types";
 
-import type { DongCode } from "@/types/DongCode";
+import type { DongCode } from "@/types/type";
 
 // 시도 리스트 가져오기
 export const getSidoList = async () => {

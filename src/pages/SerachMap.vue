@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick, type Ref } from "vue";
-import { Button } from "@/components/ui/button";
-// import { initializeMap } from "@/api/map/naverMaps";
+import { ref, onMounted, nextTick } from "vue";
 
 import { Card } from "@/components/ui/card";
 
@@ -17,6 +15,7 @@ import {
 import { gugunCluster } from "@/api/map/sample-data/gugunCluster";
 import { dongCluster } from "@/api/map/sample-data/dongCluster";
 import { getRentalHouseByRegion } from "@/api/rentalhouse";
+import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
 
 import type { RentalHouse } from "@/types/type";
 
@@ -63,7 +62,25 @@ const handleCloseDetail = () => {
         <div class="py-2">
           <AddressSelectorWrapper @selectDongCode="handleDongCode" />
         </div>
-        <div v-if="rentalHouseList.length === 0">아무것도 없음</div>
+        <div
+          v-if="rentalHouseList.length === 0"
+          class="flex flex-col items-center justify-center h-full px-4 text-center text-sm text-gray-700"
+        >
+          <DotLottieVue
+            style="height: 10rem; width: 10rem"
+            autoplay
+            loop
+            src="https://lottie.host/aa14c754-9aaf-4f6d-8cc9-f8946cbcdd61/85ItBFrOt3.lottie"
+          />
+          <div class="flex flex-col gap-1">
+            <p>주소로 검색</p>
+            <p>또는</p>
+            <p>지도를 선택하여</p>
+            <p>임대주택을 조회하세요!</p>
+          </div>
+
+          <div class="h-50"></div>
+        </div>
         <HouseList
           v-else
           @selectHouse="handleSelectHouse"

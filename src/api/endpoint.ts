@@ -15,7 +15,7 @@ export const DONGCODE = {
 export const HOUSE = {
   ALL: "/api/v1/rental",
   ONE: (houseId: string) => `/api/v1/rental/${houseId}`,
-  BY_REIGON: "/api/v1/rental/by-region",
+  BY_REGION: "/api/v1/rental/by-region",
 };
 
 export const AI = {

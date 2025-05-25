@@ -13,7 +13,7 @@ export const getRentalHouseByRegion = async (
   req: ByRegionRequest
 ): Promise<RentalHouseListResponse> => {
   const response = await api.get<ApiResponse<RentalHouseListResponse>>(
-    HOUSE.BY_REIGON,
+    HOUSE.BY_REGION,
     {
       params: req,
     }
@@ -30,7 +30,7 @@ export const getRentalHouseById = async (
     HOUSE.ONE(req.houseId)
   );
 
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data.data;
 };

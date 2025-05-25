@@ -3,6 +3,7 @@ import type { DongMapItem, GugunMapItem } from "@/types/type";
 
 // 네이버 타입이 없을 경우, 전역 선언
 declare const naver: any;
+let currentMarkers: any[] = [];
 
 export function initializeMap(): any {
   const mapDiv = document.getElementById("map");
@@ -79,8 +80,6 @@ function createCustomMarker(
 
   return marker;
 }
-
-let currentMarkers: any[] = [];
 
 function clearMarkers() {
   currentMarkers.forEach((marker) => marker.setMap(null));

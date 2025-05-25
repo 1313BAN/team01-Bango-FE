@@ -19,10 +19,15 @@ const generateaiFacility = async () => {
   loading.value = true;
 
   // 실제 API 호출이나 처리 지연 시뮬레이션
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-  aiFacility.value = await generateAIFacility({
-    houseId: props.houseId,
-  });
+  try {
+    aiFacility.value = await generateAIFacility({
+      houseId: props.houseId,
+    });
+  } catch (error) {
+    console.error("AI 시설 분석 생성 중 오류 발생:", error);
+    aiFacility.value =
+      "### 시설 분석을 생성하는 중 오류가 발생했습니다. 다시 시도해주세요.";
+  }
 
   loading.value = false;
 };

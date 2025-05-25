@@ -17,7 +17,7 @@ const props = defineProps<{
 
 <template>
   <Carousel class="relative w-full min-w-72">
-    <div class="text-center font-mono font-bold">임대주택유형</div>
+    <!-- <div class="text-center font-mono font-bold">임대주택유형</div> -->
     <CarouselContent>
       <CarouselItem v-for="style in props.houseStyles" :key="style.styleId">
         <Card class="flex flex-col gap-2 p-4">

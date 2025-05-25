@@ -3,9 +3,9 @@ import { useAuthStore } from "@/stores/auth";
 
 import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
-import HelloWorld from "@/components/HelloWorld.vue";
 import LoginRedirect from "@/pages/LoginRedirect.vue";
 import MyPage from "@/pages/MyPage.vue";
+import SearchMap from "@/pages/SerachMap.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -16,8 +16,8 @@ const routes = [
   },
   {
     path: "/map",
-    component: HelloWorld,
-    meta: { requiresAuth: true, hideLayout: true },
+    component: SearchMap,
+    meta: { requiresAuth: false, hideLayout: true },
   },
   { path: "/profile", component: MyPage, meta: { requiresAuth: true } },
   {

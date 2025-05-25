@@ -6,6 +6,18 @@ import {
   BookTextIcon,
   YoutubeIcon,
 } from "lucide-vue-next";
+
+import { getRentalHouseById, getRentalHouseByRegion } from "@/api/rentalhouse";
+
+const easterEgg = () => {
+  // getRentalHouseById({
+  //   houseId: "401155",
+  // });
+
+  getRentalHouseByRegion({
+    dongCode: "1174010500",
+  });
+};
 </script>
 
 <template>
@@ -41,6 +53,7 @@ import {
             variant="outline"
             size="sm"
             class="border-gray-500 text-gray-500 px-4 text-xs"
+            @click="easterEgg"
             >자주묻는질문</Button
           >
           <Button

@@ -6,6 +6,7 @@ import Login from "@/pages/Login.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import LoginRedirect from "@/pages/LoginRedirect.vue";
 import MyPage from "@/pages/MyPage.vue";
+import SerachMap from "@/pages/SerachMap.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -16,8 +17,8 @@ const routes = [
   },
   {
     path: "/map",
-    component: HelloWorld,
-    meta: { requiresAuth: true, hideLayout: true },
+    component: SerachMap,
+    meta: { requiresAuth: false, hideLayout: true },
   },
   { path: "/profile", component: MyPage, meta: { requiresAuth: true } },
   {
@@ -29,6 +30,11 @@ const routes = [
     path: "/:pathMatch(.*)*",
     component: () => import("@/pages/NotFound.vue"),
   },
+  // {
+  //   path: "/testMap",
+  //   component: SerachMap,
+  //   meta: { hideLayout: true },
+  // },
 ];
 
 const router = createRouter({

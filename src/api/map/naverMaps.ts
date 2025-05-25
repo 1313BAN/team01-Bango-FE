@@ -1,3 +1,9 @@
+const naverMapProps = {
+  gl: true,
+};
+
+declare const naver: any;
+
 export const initializeMap = () => {
   const map = new naver.maps.Map("map", {
     gl: true, // 지도의 벡터맵 활성화 여부

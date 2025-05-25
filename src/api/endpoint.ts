@@ -11,3 +11,13 @@ export const DONGCODE = {
   GUGUN: "/api/v1/dongcode/gugun",
   DONG: "/api/v1/dongcode/dong",
 };
+
+export const HOUSE = {
+  ALL: "/api/v1/rental",
+  ONE: (houseId: string) => `/api/v1/rental/${houseId}`,
+  BY_REIGON: "/api/v1/rental/by-region",
+};
+
+export const AI = {
+  GEN: (houseId: string) => `/api/v1/ai/rental/${houseId}/facilities`,
+};

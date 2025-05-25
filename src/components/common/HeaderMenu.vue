@@ -29,11 +29,9 @@ const go = (path: string) => {
     <Menubar class="border-b px-4 py-8 justify-between flex fixed w-screen">
       <!-- 왼쪽 영역 -->
       <div class="flex space-x-4">
-        <MenubarMenu>
-          <MenubarTrigger @click="go('/')">
-            <img :src="BangoLogo" class="h-14"
-          /></MenubarTrigger>
-        </MenubarMenu>
+        <div @click="go('/')" class="cursor-pointer">
+          <img :src="BangoLogo" class="h-14" />
+        </div>
       </div>
 
       <!-- 오른쪽 영역 -->

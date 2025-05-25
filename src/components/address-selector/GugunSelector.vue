@@ -32,7 +32,7 @@ const onSelect = (value: any) => {
     :modelValue="selected ?? ''"
     @update:modelValue="onSelect"
   >
-    <SelectTrigger class="w-[150px]">
+    <SelectTrigger class="w-36">
       <SelectValue placeholder="구/군 선택" />
     </SelectTrigger>
     <SelectContent>

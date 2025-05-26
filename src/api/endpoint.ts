@@ -21,8 +21,9 @@ export const HOUSE = {
 export const NOTICE = {
   ALL: "/api/v1/notice",
   ONE: (noticeId: number) => `/api/v1/notice/${noticeId}`,
-  LIKE: (noticeId: number) => `/api/v1/notice/${noticeId}/like`,
+  DUMP: "/api/v1/notice/dump",
   LIKED: "/api/v1/notice/liked",
+  LIKE: (noticeId: number) => `/api/v1/notice/${noticeId}/like`,
 };
 
 export const AI = {

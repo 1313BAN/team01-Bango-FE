@@ -6,6 +6,8 @@ import Login from "@/pages/Login.vue";
 import LoginRedirect from "@/pages/LoginRedirect.vue";
 import MyPage from "@/pages/MyPage.vue";
 import SearchMap from "@/pages/SerachMap.vue";
+import NoticeListPage from '@/pages/NoticeListPage.vue'
+import NoticeDetailPage from '@/pages/NoticeDetailPage.vue'
 
 const routes = [
   { path: "/", component: Home },
@@ -23,6 +25,14 @@ const routes = [
   {
     path: "/auth/:socialPlatform/redirect",
     component: LoginRedirect,
+  },
+
+  { path: '/notice',
+    component: NoticeListPage
+  },
+  { path: '/notice/:id',
+    component: NoticeDetailPage,
+    props: true
   },
 
   {

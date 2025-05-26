@@ -79,3 +79,27 @@ export type RentalHouse = {
   longitude: string;
   styles: RentalHouseStyle[];
 };
+
+export type RentalNotice = {
+  createdAt: string;
+  updatedAt: string;
+  noticeId: number;
+  pblancId: string;
+  noticeName: string;
+  institutionType: string;
+  status: string;
+  houseType: string;
+  supplyType: string;
+  createdDate: string;
+  announceDate: string;
+  supplyHoCount: string;
+  contactInfo: string;
+  institutionUrl: string;
+  houseName: string;
+  sidoName: string;
+  gugunName: string;
+  pnu: string;
+  beginDate: string;
+  endDate: string;
+  lastSyncedAt: string | null;
+};

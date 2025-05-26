@@ -35,20 +35,20 @@ export type HouseDetail = {
   lessor: string;
 };
 
-export type GugunMapItem = {
-  gugunName: string;
-  houseCount: number;
-  lat: number;
-  long: number;
-  nextZoomLevel: number;
-};
+// export type GugunMapItem = {
+//   gugunName: string;
+//   houseCount: number;
+//   lat: number;
+//   long: number;
+//   nextZoomLevel: number;
+// };
 
-export type DongMapItem = {
-  dongName: string;
-  houseCount: number;
-  lat: number;
-  long: number;
-};
+// export type DongMapItem = {
+//   dongName: string;
+//   houseCount: number;
+//   lat: number;
+//   long: number;
+// };
 
 export type RentalHouseStyle = {
   styleId: number;
@@ -75,7 +75,24 @@ export type RentalHouse = {
   houseType: string;
   hasElevator: string;
   parkingCount: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   styles: RentalHouseStyle[];
+};
+
+export type GugunMapItem = {
+  gugunCode: string;
+  gugunName: string;
+  rentalCount: number;
+  avgLatitude: number;
+  avgLongitude: number;
+  nextZoomLevel: 13;
+};
+
+export type DongMapItem = {
+  dongCode: string;
+  dongName: string;
+  rentalCount: number;
+  avgLatitude: number;
+  avgLongitude: number;
 };

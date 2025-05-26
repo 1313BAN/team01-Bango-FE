@@ -11,23 +11,48 @@ import {
   initializeMap,
   initializeMarker,
   setupMapEventHandlersWithZoom,
+  moveMapToDong,
 } from "@/api/map/naverMapUtil";
-import { gugunCluster } from "@/api/map/sample-data/gugunCluster";
-import { dongCluster } from "@/api/map/sample-data/dongCluster";
+// import { gugunCluster } from "@/api/map/sample-data/gugunCluster";
+// import { dongCluster } from "@/api/map/sample-data/dongCluster";
 import { getRentalHouseByRegion } from "@/api/rentalhouse";
 import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
 
-import type { RentalHouse } from "@/types/type";
+import type { DongMapItem, GugunMapItem, RentalHouse } from "@/types/type";
+import { getDongSummary, getGugunSummary } from "@/api/map";
 
 const selectedHouse = ref<RentalHouse | null>(null);
 const rentalHouseList = ref<RentalHouse[]>([]);
 
+const gugunCluster = ref<GugunMapItem[]>();
+const dongCluster = ref<DongMapItem[]>();
+
+const loadData = async () => {
+  gugunCluster.value = await getGugunSummary();
+  dongCluster.value = await getDongSummary();
+};
+
+let map: any;
 // 컴포넌트 마운트 시 지도 생성, 최초 마커 설정, 이벤트 핸들러 추가
 onMounted(async () => {
   await nextTick();
-  const map = initializeMap();
-  initializeMarker(map, gugunCluster);
-  setupMapEventHandlersWithZoom(map, gugunCluster, dongCluster);
+  map = initializeMap();
+
+  await loadData();
+
+  initializeMarker(map, gugunCluster.value!);
+  setupMapEventHandlersWithZoom(
+    map,
+    gugunCluster.value!,
+    dongCluster.value!,
+    (list) => {
+      rentalHouseList.value = list;
+      console.log(list);
+    },
+    (house) => {
+      selectedHouse.value = house; // ✅ 클릭 시 디테일 열기
+    }
+  );
 });
 
 const handleDongCode = async (dongcode: string) => {
@@ -38,6 +63,10 @@ const handleDongCode = async (dongcode: string) => {
 
   rentalHouseList.value = rentalHouseListResponse;
   console.log(rentalHouseListResponse);
+
+  if (map && dongCluster.value) {
+    moveMapToDong(map, dongCluster.value, dongcode);
+  }
 };
 
 const handleSelectHouse = (house: RentalHouse) => {

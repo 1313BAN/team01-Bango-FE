@@ -28,11 +28,12 @@ const routes = [
   },
 
   { path: '/notice',
+    name: 'NoticeListPage',
     component: NoticeListPage
   },
   { path: '/notice/:id',
-    component: NoticeDetailPage,
     name: 'NoticeDetail',
+    component: NoticeDetailPage,
     props: true
   },
 

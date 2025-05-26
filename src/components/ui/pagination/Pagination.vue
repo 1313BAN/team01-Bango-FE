@@ -1,40 +1,46 @@
 <template>
-  <nav class="flex justify-center items-center space-x-2 my-4">
+  <div class="flex justify-center mt-4 space-x-2">
     <button
-      class="px-3 py-1 rounded border border-gray-300 disabled:opacity-50"
       :disabled="currentPage === 1"
-      @click="$emit('change-page', currentPage - 1)"
+      @click="$emit('change-page', currentPage - 1)" class="px-3 py-1 border rounded hover:bg-gray-200"
     >
       이전
     </button>
 
     <button
-      v-for="page in totalPages"
+      v-for="page in pages"
       :key="page"
-      @click="$emit('change-page', page)"
       :class="[
-        'px-3 py-1 rounded border',
-        page === currentPage
-          ? 'bg-indigo-600 text-white border-indigo-600'
-          : 'border-gray-300 text-gray-700'
+        'px-3 py-1 border rounded',
+        page === currentPage ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'
       ]"
+      @click="$emit('change-page', page)"
     >
       {{ page }}
     </button>
 
     <button
-      class="px-3 py-1 rounded border border-gray-300 disabled:opacity-50"
       :disabled="currentPage === totalPages"
-      @click="$emit('change-page', currentPage + 1)"
+      @click="$emit('change-page', currentPage + 1)" class="px-3 py-1 border rounded hover:bg-gray-200"
     >
       다음
     </button>
-  </nav>
+  </div>
 </template>
 
 <script setup>
-defineProps({
-  currentPage: { type: Number, required: true },
-  totalPages: { type: Number, required: true }
+import { computed } from 'vue'
+const props = defineProps({
+  currentPage: Number,
+  totalPages: Number
+})
+
+const pages = computed(() => {
+  // 단순 전체 페이지 다 나열
+  const pageList = []
+  for (let i = 1; i <= props.totalPages; i++) {
+    pageList.push(i)
+  }
+  return pageList
 })
 </script>

@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import Table from '@/components/ui/table/Table.vue'
 import TableHeader from '@/components/ui/table/TableHeader.vue'
@@ -63,6 +63,7 @@ const router = useRouter()
 const pageNo = ref(1)
 const pageSize = 10
 const totalPages = ref(1)
+const totalCount = ref(0)
 
 const fetchNotices = async () => {
   loading.value = true
@@ -70,11 +71,13 @@ const fetchNotices = async () => {
   try {
     const res = await fetch(`http://localhost:8080/api/v1/notice?pageNo=${pageNo.value}&pageSize=${pageSize}`)
     if (!res.ok) throw new Error('공고 목록을 불러오는 데 실패했습니다.')
-    console.log(totalPages.value)
 
     const json = await res.json()
+    console.log("서버 응답 :", json)
+
     notices.value = json.data.noticeWithLikeds.map(item => item.rentalNotice)
-    totalPages.value = json.data.totalPages || 1
+    totalPages.value = json.data.totalPageNo
+    totalCount.value = json.data.totalPageCount
   } catch (e) {
     error.value = e.message
   } finally {
@@ -99,6 +102,7 @@ const changePage = (newPage) => {
 }
 
 onMounted(fetchNotices)
+watch(pageNo, fetchNotices)
 </script>
 
 <style scoped>

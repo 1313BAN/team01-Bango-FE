@@ -32,6 +32,7 @@ const routes = [
   },
   { path: '/notice/:id',
     component: NoticeDetailPage,
+    name: 'NoticeDetail',
     props: true
   },
 

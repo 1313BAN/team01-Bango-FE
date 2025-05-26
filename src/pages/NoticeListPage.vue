@@ -75,7 +75,10 @@ const fetchNotices = async () => {
     const json = await res.json()
     console.log("서버 응답 :", json)
 
-    notices.value = json.data.noticeWithLikeds.map(item => item.rentalNotice)
+    notices.value = json.data.noticeWithLikeds.map(item => ({
+      ...item.rentalNotice,
+      noticeId: item.rentalNotice.noticeId
+    }))
     totalPages.value = json.data.totalPageNo
     totalCount.value = json.data.totalPageCount
   } catch (e) {

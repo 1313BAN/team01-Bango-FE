@@ -1,6 +1,6 @@
 <!-- src/components/searchMap/HouseDetail.vue -->
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
+// import { defineProps, defineEmits } from "vue";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -19,7 +19,7 @@ const emit = defineEmits(["close"]);
     <Button variant="ghost" class="p-3" @click="emit('close')">닫기</Button>
   </div>
 
-  <div class="overflow-y-auto h-[40rem] rounded-md border-0">
+  <div class="overflow-y-auto h-[calc(100vh-8rem)] rounded-md border-0">
     <div class="p-2 space-y-2">
       <!-- 사진 영역 -->
       <Card class="p-0 flex justify-center items-center max-w-80 gap-2">

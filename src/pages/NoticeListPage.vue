@@ -9,27 +9,12 @@
       <table class="w-full text-sm border-collapse rounded overflow-hidden">
         <thead class="bg-gray-100 text-left">
           <tr>
-            <th class="p-3 w-36">상태</th>
+            <th class="p-3 w-36">진행상태</th>
             <th class="p-3">공고명</th>
             <th class="p-3">지역</th>
             <th class="p-3">모집기간</th>
-            <th class="p-3">기관</th>
-            <th class="p-3 text-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-gray-400 mx-auto"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z"
-                />
-              </svg>
-            </th>
+            <th class="p-3">공급기관</th>
+            <th class="p-3 text-center">관심공고</th>
           </tr>
         </thead>
         <tbody>
@@ -39,11 +24,17 @@
             @click="goDetail(notice.noticeId)"
             class="hover:bg-gray-50 cursor-pointer border-b"
           >
-            <td class="p-3">
+            <td class="p-3 space-x-1">
               <span
                 :class="['px-2 py-0.5 rounded-full text-xs font-medium', statusColorClass(notice)]"
               >
                 {{ applyStatus(notice) }}
+              </span>
+              <span
+                v-if="notice.supplyType"
+                :class="['px-2 py-0.5 rounded-full text-xs font-medium', supplyTypeColorClass(notice.supplyType)]"
+              >
+                {{ notice.supplyType }}
               </span>
             </td>
             <td class="p-3 font-medium">{{ notice.noticeName || '제목 없음' }}</td>
@@ -132,6 +123,7 @@ const fetchNotices = async () => {
       isLiked: item.isLiked
     }))
     totalPages.value = json.data.totalPageNo
+    console.log(notices.value)
   } catch (e) {
     error.value = e.message
   } finally {
@@ -167,6 +159,15 @@ const statusColorClass = (notice) => {
     '정보없음': 'bg-gray-100 text-gray-600'
   }
   return colorMap[status] || 'bg-gray-100 text-gray-600'
+}
+
+const supplyTypeColorClass = (type) => {
+  const colorMap = {
+    '행복주택': 'bg-yellow-100 text-yellow-800',
+    '전세임대': 'bg-gray-100 text-gray-800',
+    '매입임대': 'bg-green-100 text-green-800'
+  }
+  return colorMap[type] || 'bg-gray-100 text-gray-600'
 }
 
 const goDetail = (id) => {

@@ -35,8 +35,7 @@
             <!-- 이미지 -->
             <div class="w-24 h-24 bg-gray-100 rounded-md overflow-hidden">
               <img
-                v-if="rentalNotice.imageUrl"
-                :src="rentalNotice.imageUrl"
+                :src="rentalNotice.imageUrl || '/images/default-notice.png'"
                 alt="공고 이미지"
                 class="object-cover w-full h-full"
               />

@@ -29,3 +29,9 @@ export const NOTICE = {
 export const AI = {
   GEN: (houseId: string) => `/api/v1/ai/rental/${houseId}/facilities`,
 };
+
+export const MAP = {
+  GUGUN: "/api/v1/rental/gugun",
+  DONG: "/api/v1/rental/dong",
+  WITHIN_BOUNDS: "/api/v1/rental/within-bounds",
+};

@@ -63,11 +63,14 @@ watch(
         class="prose prose-sm max-w-full bg-gray-50 text-gray-800 p-4 rounded-xl border border-gray-200 [&_p]:text-xs [&_li]:text-xs [&_h2]:text-base [&_h3]:text-sm"
       ></div>
     </template>
-    <DotLottieVue
-      v-if="loading"
-      autoplay
-      loop
-      src="https://lottie.host/169571d8-dde8-48a2-aa5c-049d6eaa107f/HueWTxlawe.lottie"
-    />
+    <div v-if="loading" class="flex justify-center items-center">
+      <DotLottieVue
+        autoplay
+        loop
+        style="height: 6rem; width: 6rem"
+        src="https://lottie.host/169571d8-dde8-48a2-aa5c-049d6eaa107f/HueWTxlawe.lottie"
+        class="my-4"
+      />
+    </div>
   </Card>
 </template>

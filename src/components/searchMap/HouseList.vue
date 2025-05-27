@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits } from "vue";
+// import { defineEmits } from "vue";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import type { RentalHouse } from "@/types/type";
@@ -29,7 +29,7 @@ const getBadgeColor = (supplyType: string): string => {
 </script>
 
 <template>
-  <ScrollArea class="h-[39rem] w-full rounded-md border-0">
+  <ScrollArea class="h-[calc(100vh-8rem)] w-full rounded-md border-0">
     <div class="px-2 space-y-1">
       <div
         v-for="item in props.rentalList"

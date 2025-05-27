@@ -168,7 +168,7 @@ const applyStatus = computed(() => {
   const begin = new Date(beginDate)
   const end = new Date(endDate)
 
-  if (today.value < begin) return '접수 전'
+  if (today.value < begin) return '모집예정'
   if (today.value >= begin && today.value <= end) return '모집중'
   if (today.value > end) return '모집완료'
 
@@ -177,7 +177,7 @@ const applyStatus = computed(() => {
 
 // 상태별 색상 매핑
 const statusColorMap = {
-  '접수 전': 'bg-yellow-100 text-yellow-800',
+  '모집예정': 'bg-yellow-100 text-yellow-800',
   '모집중': 'bg-red-100 text-red-800',
   '모집완료': 'bg-green-100 text-green-800',
   '정보없음': 'bg-gray-100 text-gray-600',

@@ -73,7 +73,5 @@ const resetFilters = () => {
   selectedStatus.value = ''
   selectedSupplyType.value = ''
   emit('reset')
-  emit('update:status', '')
-  emit('update:supplyType', '')
 }
 </script>

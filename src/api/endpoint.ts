@@ -18,6 +18,14 @@ export const HOUSE = {
   BY_REGION: "/api/v1/rental/by-region",
 };
 
+export const NOTICE = {
+  ALL: "/api/v1/notice",
+  ONE: (noticeId: number) => `/api/v1/notice/${noticeId}`,
+  DUMP: "/api/v1/notice/dump",
+  LIKED: "/api/v1/notice/liked",
+  LIKE: (noticeId: number) => `/api/v1/notice/${noticeId}/like`,
+};
+
 export const AI = {
   GEN: (houseId: string) => `/api/v1/ai/rental/${houseId}/facilities`,
 };

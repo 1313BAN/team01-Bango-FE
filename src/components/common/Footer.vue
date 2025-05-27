@@ -54,15 +54,16 @@ const easterEgg = () => {
             size="sm"
             class="border-gray-500 text-gray-500 px-4 text-xs"
             @click="easterEgg"
-            >자주묻는질문</Button
-          >
+            >자주묻는질문
+          </Button>
           <Button
             variant="default"
             size="sm"
-            class="px-4 bg-blue-600 text-white hover:bg-blue-500 text-xs"
+            class="px-4 bg-indigo-600 text-white hover:bg-indigo-700 text-xs"
             @click="throw Error();"
-            >1:1문의</Button
           >
+            1:1문의
+          </Button>
         </div>
         <!-- SNS 아이콘 -->
         <div class="flex gap-3 mt-4">

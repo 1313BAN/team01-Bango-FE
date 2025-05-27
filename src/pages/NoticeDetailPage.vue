@@ -161,6 +161,7 @@ const today = computed(() => new Date())
 
 // 모집 상태 계산
 const applyStatus = computed(() => {
+  if (!rentalNotice.value) return '정보없음'
   const beginDate = rentalNotice.value.beginDate
   const endDate = rentalNotice.value.endDate
   if (!beginDate || !endDate) return '정보없음'

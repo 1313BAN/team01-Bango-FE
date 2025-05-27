@@ -135,8 +135,8 @@
 
       <!-- 하단 정보 -->
       <footer class="text-xs text-gray-400 border-t pt-2 mt-4 space-y-0.5">
-        <p>업데이트: {{ formatDateTime(rentalNotice.updatedAt) || '-' }}</p>
-        <p>생성일: {{ formatDateTime(rentalNotice.createdAt) || '-' }}</p>
+        <p>업데이트: {{ formatDate(rentalNotice.updatedAt) || '-' }}</p>
+        <p>생성일: {{ formatDate(rentalNotice.createdAt) || '-' }}</p>
       </footer>
     </template>
 
@@ -149,6 +149,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { formatDate } from '@/utils/dateUtils'
 
 const route = useRoute()
 const router = useRouter()
@@ -205,15 +206,6 @@ const rentalNotice = computed(() => {
   if (!notice.value) return {}
   return notice.value.rentalNotice || notice.value
 })
-
-const formatDate = (dateStr) => {
-  if (!dateStr) return ''
-  return new Date(dateStr).toLocaleDateString()
-}
-const formatDateTime = (dateStr) => {
-  if (!dateStr) return ''
-  return new Date(dateStr).toLocaleString()
-}
 
 const goBack = () => {
   router.push({ name: 'NoticeListPage' })

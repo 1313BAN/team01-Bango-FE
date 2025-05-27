@@ -102,6 +102,7 @@ import { useRouter } from 'vue-router'
 import Pagination from '@/components/ui/pagination/Pagination.vue'
 import LoginAlertModal from '@/components/login/LoginAlertModal.vue'
 import NoticeFilter from '@/components/searchNotice/NoticeFilter.vue'
+import { formatDate } from '@/utils/dateUtils'
 
 const router = useRouter()
 
@@ -161,15 +162,6 @@ const fetchNotices = async () => {
   } finally {
     loading.value = false
   }
-}
-
-const formatDate = (dateStr) => {
-  if (!dateStr) return ''
-  const d = new Date(dateStr)
-  const yyyy = d.getFullYear()
-  const mm = String(d.getMonth() + 1).padStart(2, '0')
-  const dd = String(d.getDate()).padStart(2, '0')
-  return `${yyyy}-${mm}-${dd}`
 }
 
 const applyStatus = (notice) => {

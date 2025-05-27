@@ -146,8 +146,6 @@ const fetchNotices = async () => {
     const res = await fetch(`http://localhost:8080/api/v1/notice/search?${query.toString()}`, {
       credentials: 'include',
     })
-
-    console.log(`http://localhost:8080/api/v1/notice/search?${query.toString()}`)
     if (!res.ok) throw new Error('공고 목록을 불러오는 데 실패했습니다.')
 
     const json = await res.json()

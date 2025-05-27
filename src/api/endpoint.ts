@@ -20,10 +20,11 @@ export const HOUSE = {
 
 export const NOTICE = {
   ALL: "/api/v1/notice",
-  ONE: (noticeId: number) => `/api/v1/notice/${noticeId}`,
-  DUMP: "/api/v1/notice/dump",
-  LIKED: "/api/v1/notice/liked",
-  LIKE: (noticeId: number) => `/api/v1/notice/${noticeId}/like`,
+  ALL_LIKED: "/api/v1/notice/like",
+  ONE: (noticeId: number) => `/api/v1/notice/p/${noticeId}`,
+  DUMP: "/api/v1/notice/p/dump",
+  LIKED: "/api/v1/like/notice/liked",
+  LIKE: (noticeId: number) => `/api/v1/like/notice/${noticeId}`,
 };
 
 export const AI = {

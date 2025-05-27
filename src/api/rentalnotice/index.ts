@@ -8,8 +8,13 @@ import type {
 } from "@/api/rentalnotice/types";
 
 // 전체 공고 리스트 조회
-export const getNotices = async (): Promise<NoticeListResponse> => {
-  const response = await api.get<ApiResponse<NoticeListResponse>>(NOTICE.ALL);
+export const getNotices = async (
+  req: any,
+  url: string
+): Promise<NoticeListResponse> => {
+  const response = await api.get<ApiResponse<NoticeListResponse>>(url, {
+    params: req,
+  });
   return response.data.data;
 };
 
@@ -25,12 +30,14 @@ export const getNoticeById = async (
 
 // 공고 찜
 export const likeNotice = async (noticeId: number): Promise<void> => {
-  await api.post(NOTICE.LIKE(noticeId));
+  return (await api.post(NOTICE.LIKE(noticeId))).data;
 };
 
 // 공고 찜 해제
 export const unlikeNotice = async (noticeId: number): Promise<void> => {
-  await api.delete(NOTICE.LIKE(noticeId));
+  const res = await api.delete(NOTICE.LIKE(noticeId));
+
+  return res.data;
 };
 
 // 찜한 공고 목록 조회

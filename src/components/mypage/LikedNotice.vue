@@ -2,14 +2,6 @@
   <div class="p-6 max-w-6xl mx-auto">
     <h2 class="text-2xl font-bold mb-4">공공임대주택 모집공고 리스트</h2>
 
-    <NoticeFilter
-      :status="filterStatus"
-      :supplyType="filterSupplyType"
-      @update:status="onStatusChange"
-      @update:supplyType="onSupplyTypeChange"
-      @reset="onResetFilters"
-    />
-
     <div v-if="loading" class="text-center text-gray-500">로딩 중...</div>
     <div v-else-if="error" class="text-red-500 mb-4 text-center">
       {{ error }}
@@ -122,7 +114,12 @@ import LoginAlertModal from "@/components/login/LoginAlertModal.vue";
 import NoticeFilter from "@/components/searchNotice/NoticeFilter.vue";
 import { formatDate } from "@/utils/dateUtils";
 import { applyStatus, statusColorClass } from "/src/utils/noticeUtils.js";
-import { getNotices, likeNotice, unlikeNotice } from "@/api/rentalnotice";
+import {
+  getLikedNotices,
+  getNotices,
+  likeNotice,
+  unlikeNotice,
+} from "@/api/rentalnotice";
 import { useAuthStore } from "@/stores/auth";
 import { NOTICE } from "@/api/endpoint";
 
@@ -145,12 +142,6 @@ const showLoginAlert = ref(false);
 const filterStatus = ref("");
 const filterSupplyType = ref("");
 
-// 필터 값 바뀌면 페이지 초기화 + 공고 다시 가져오기
-watch([filterStatus, filterSupplyType], () => {
-  pageNo.value = 1;
-  fetchNotices();
-});
-
 // 페이지 번호 바뀔 때 공고 다시 가져오기
 watch(pageNo, () => {
   fetchNotices();
@@ -169,20 +160,14 @@ const fetchNotices = async () => {
     };
     // console.log(query);
 
-    console.log(authStore.isAuthenticated);
-    const res = await getNotices(
-      query,
-      authStore.isAuthenticated ? NOTICE.ALL_LIKED : NOTICE.ALL
-    );
-    if (res.length === 0)
-      throw new Error("공고 목록을 불러오는 데 실패했습니다.");
+    const res = await getLikedNotices();
 
     console.log(res);
 
-    notices.value = res.noticeWithLikeds.map((item) => ({
+    notices.value = res.noticeLikeList.map((item) => ({
       ...item.rentalNotice,
       noticeId: item.rentalNotice.noticeId,
-      isLiked: item.isLiked,
+      isLiked: true,
     }));
 
     totalPages.value = res.totalPageNo;
@@ -212,11 +197,6 @@ const changePage = (newPage) => {
   // fetchNotices()는 watch(pageNo)에서 호출됨
 };
 
-const goLogin = () => {
-  showLoginAlert.value = false;
-  router.push({ name: "Login" });
-};
-
 const toggleLike = async (notice) => {
   try {
     // console.log(notice.noticeId);
@@ -242,19 +222,6 @@ const toggleLike = async (notice) => {
       alert("좋아요 처리 중 오류가 발생했습니다.");
     }
   }
-};
-
-const onStatusChange = (val) => {
-  filterStatus.value = val;
-};
-
-const onSupplyTypeChange = (val) => {
-  filterSupplyType.value = val;
-};
-
-const onResetFilters = () => {
-  filterStatus.value = "";
-  filterSupplyType.value = "";
 };
 
 onMounted(() => {

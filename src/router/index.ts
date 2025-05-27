@@ -13,6 +13,7 @@ const routes = [
   { path: "/", component: Home },
   {
     path: "/login",
+    name: 'Login',
     component: Login,
     // meta: { hideLayout: true }, // <- Menubar/Footer 숨기기 설정
   },

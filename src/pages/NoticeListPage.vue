@@ -81,6 +81,12 @@
       @change-page="changePage"
       class="mt-6"
     />
+
+    <LoginAlertModal
+      v-if="showLoginAlert"
+      @confirm="goLogin"
+      @cancel="() => showLoginAlert = false"
+    />
   </div>
 </template>
 
@@ -88,6 +94,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Pagination from '@/components/ui/pagination/Pagination.vue'
+import LoginAlertModal from '@/components/login/LoginAlertModal.vue'
 
 const router = useRouter()
 const notices = ref([])
@@ -97,6 +104,7 @@ const error = ref(null)
 const pageNo = ref(1)
 const pageSize = 10
 const totalPages = ref(1)
+const showLoginAlert = ref(false)
 
 const today = new Date()
 
@@ -107,13 +115,6 @@ const fetchNotices = async () => {
     const res = await fetch(`http://localhost:8080/api/v1/notice?pageNo=${pageNo.value}&pageSize=${pageSize}`, {
       credentials: 'include',
     })
-
-    if (res.status === 400 || res.status === 401) {
-      alert('로그인이 필요합니다.')
-      router.push({ name: 'Login' })
-      return
-    }
-
     if (!res.ok) throw new Error('공고 목록을 불러오는 데 실패했습니다.')
 
     const json = await res.json()
@@ -180,6 +181,11 @@ const changePage = (newPage) => {
   fetchNotices()
 }
 
+const goLogin = () => {
+  showLoginAlert.value = false
+  router.push({ name: 'Login' })
+}
+
 const toggleLike = async (notice) => {
   try {
     const res = await fetch(`http://localhost:8080/api/v1/notice/${notice.noticeId}/like`, {
@@ -188,6 +194,11 @@ const toggleLike = async (notice) => {
         'Content-Type': 'application/json'
       }
     })
+
+    if (res.status === 400 || res.status === 401) {
+      showLoginAlert.value = true
+      return
+    }
     if (!res.ok) throw new Error('좋아요 요청 실패')
     notice.isLiked = !notice.isLiked
   } catch (e) {

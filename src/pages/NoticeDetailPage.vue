@@ -150,7 +150,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { formatDate } from '@/utils/dateUtils'
-import { applyStatus, statusColorClass } from '/src/utils/noticeUtils.js'
+import { applyStatus, statusColorClass } from '@/utils/noticeUtils'
 
 const props = defineProps({
   id: [String, Number]
